@@ -117,11 +117,11 @@
                                 <div class="swiper-wrapper" id="preview-img">
                                     @foreach(json_decode($product->photo_deskripsi) as $image)
                                     <div class="swiper-slide row">
-                                        <div class="col-md-12">
-                                            <img src="{{asset('storage/'.$image)}}" class="img-fluid" />
-                                        </div>
-                                        <div class="col-md-12">
+                                        <div class="col-md-12 mb-1 p-0 px-1">
                                             <button class="btn btn-outline-danger btn-sm" type="button" data-item="{{$image}}" onclick="remove_image(this)" style="font-size: 12px;">Remove</button>
+                                        </div>
+                                        <div class="col-md-12 p-0 px-1">
+                                            <img src="{{asset('storage/'.$image)}}" class="img-fluid" />
                                         </div>
                                     </div>
                                     @endforeach

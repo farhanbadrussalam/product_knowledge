@@ -156,7 +156,28 @@ class ProductController extends Controller
             'description' => 'required'
         ]);
 
-        dd($request);
+        // untuk menghapus deskripsi image
+        $listImage = json_decode($product->photo_deskripsi);
+        if (isset($request->removeImage)) {
+            // untuk menghapus gambar yang lama di dalam file
+            foreach ($request->removeImage as $key => $value) {
+                Storage::delete('public/' . $value);
+            }
+            // Untuk membandingkan 2 array, nilai result nya adalah value yang ga sama
+            $result = array_diff($listImage, $request->removeImage);
+            $listImage = $result;
+        }
+
+        // Untuk menambahkan deskripsi image
+        if ($request->file('photo_deskripsi')) {
+            $photo_deskripsi = $request->file('photo_deskripsi');
+            foreach ($photo_deskripsi as $key => $value) {
+                $nameFile = $value->store('image-product');
+                // array_push($tmpPhoto, str_replace('public/', '', $nameFile));
+                array_push($listImage, $nameFile);
+            }
+        }
+
         if ($request->file('photo_utama')) {
             if ($request->oldImage) {
                 Storage::delete('public/' . $request->oldImage);
@@ -165,6 +186,7 @@ class ProductController extends Controller
             $validatedData['photo_utama'] = str_replace('public/', '', $nameFile);
         }
 
+        $validatedData['photo_deskripsi'] = json_encode($listImage);
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->desctiption), 100);
 

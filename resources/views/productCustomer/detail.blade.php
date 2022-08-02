@@ -34,6 +34,9 @@
             <div class="mt-3">
                 <div class="swiper mySwiper">
                     <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <img src="{{asset('storage/'.$product->photo_utama)}}" class="img-fluid" />
+                        </div>
                         @foreach(json_decode($product->photo_deskripsi) as $image)
                         <div class="swiper-slide">
                             <img src="{{asset('storage/'.$image)}}" class="img-fluid" />
