@@ -157,15 +157,19 @@ class ProductController extends Controller
         ]);
 
         // untuk menghapus deskripsi image
+        $arrImage = array();
         $listImage = json_decode($product->photo_deskripsi);
+        foreach ($listImage as $key => $value) {
+            array_push($arrImage, $value);
+        }
         if (isset($request->removeImage)) {
             // untuk menghapus gambar yang lama di dalam file
             foreach ($request->removeImage as $key => $value) {
-                Storage::delete('public/' . $value);
+                Storage::delete($value);
             }
             // Untuk membandingkan 2 array, nilai result nya adalah value yang ga sama
-            $result = array_diff($listImage, $request->removeImage);
-            $listImage = $result;
+            $result = array_diff($arrImage, $request->removeImage);
+            $arrImage = $result;
         }
 
         // Untuk menambahkan deskripsi image
@@ -174,19 +178,19 @@ class ProductController extends Controller
             foreach ($photo_deskripsi as $key => $value) {
                 $nameFile = $value->store('image-product');
                 // array_push($tmpPhoto, str_replace('public/', '', $nameFile));
-                array_push($listImage, $nameFile);
+                array_push($arrImage, $nameFile);
             }
         }
 
         if ($request->file('photo_utama')) {
             if ($request->oldImage) {
-                Storage::delete('public/' . $request->oldImage);
+                Storage::delete($request->oldImage);
             }
             $nameFile = $request->file('photo_utama')->store('public/image-product');
             $validatedData['photo_utama'] = str_replace('public/', '', $nameFile);
         }
 
-        $validatedData['photo_deskripsi'] = json_encode($listImage);
+        $validatedData['photo_deskripsi'] = json_encode($arrImage);
         $validatedData['user_id'] = auth()->user()->id;
         $validatedData['excerpt'] = Str::limit(strip_tags($request->desctiption), 100);
 
@@ -205,12 +209,12 @@ class ProductController extends Controller
     public function destroy(product $product)
     {
         if ($product->photo_utama) {
-            Storage::delete('public/' . $product->photo_utama);
+            Storage::delete($product->photo_utama);
         }
         $deskripsiPhoto = json_decode($product->photo_deskripsi);
 
         foreach ($deskripsiPhoto as $key => $value) {
-            Storage::delete('public/' . $value);
+            Storage::delete($value);
         }
         product::destroy($product->id);
         return 'Product has been deleted';
