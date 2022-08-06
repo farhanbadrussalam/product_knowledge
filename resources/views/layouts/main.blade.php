@@ -297,7 +297,7 @@
         @yield('container')
     </main>
     @else
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 py-3 shadow">
+    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 py-3 shadow" style="background-color: #03030e !important;">
         <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
             <img src="{{ asset('gambar/kitoshindo-logo.png') }}" alt="logo" class="img-fluid" style="width: 100px;">
         </a>
