@@ -186,8 +186,8 @@ class ProductController extends Controller
             if ($request->oldImage) {
                 Storage::delete($request->oldImage);
             }
-            $nameFile = $request->file('photo_utama')->store('public/image-product');
-            $validatedData['photo_utama'] = str_replace('public/', '', $nameFile);
+            $nameFile = $request->file('photo_utama')->store('image-product');
+            $validatedData['photo_utama'] = $nameFile;
         }
 
         $validatedData['photo_deskripsi'] = json_encode($arrImage);

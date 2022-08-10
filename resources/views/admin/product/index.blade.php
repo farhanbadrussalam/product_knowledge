@@ -32,26 +32,43 @@
 
 <script>
     let table_ = false;
-    $(function(){
+    $(function() {
         table_ = $('#table').DataTable({
             processing: true,
             serverSide: true,
             methode: 'GET',
             ajax: "{{ url('/product/dataAjax') }}",
-            columns : [
-                {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-                {data: 'name_product', name: 'name_product'},
-                {data: 'kategori', name: 'kategori'},
-                {data: 'harga', name: 'harga'},
-                {data: 'action', name: 'action', orderable: false, searchable: false}
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'name_product',
+                    name: 'name_product'
+                },
+                {
+                    data: 'kategori',
+                    name: 'kategori'
+                },
+                {
+                    data: 'harga',
+                    name: 'harga'
+                },
+                {
+                    data: 'action',
+                    name: 'action',
+                    orderable: false,
+                    searchable: false
+                }
             ]
         })
 
     })
+
     function deleteThis(id) {
         const validasi = confirm('Are you sure want to delete?');
 
-        if(validasi){
+        if (validasi) {
             $.ajax({
                 url: `{{ url('dashboard/product') }}/${id}`,
                 type: 'DELETE',
