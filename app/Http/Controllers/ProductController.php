@@ -31,7 +31,7 @@ class ProductController extends Controller
 
     public function dataAjax()
     {
-        $products = product::where('user_id', auth()->user()->id)->get();
+        $products = product::where('user_id', auth()->user()->id)->orderBy('id', 'DESC')->get();
 
         return DataTables::of($products)
             ->addIndexColumn()
@@ -89,10 +89,10 @@ class ProductController extends Controller
             'kategori_id' => 'required',
             'harga' => 'required|numeric',
             'description' => 'required',
-            'photo_utama' => 'required|image|file|max:2048'
+            'photo_utama' => 'required|image|file|max:2048',
+            'photo_deskripsi' => 'required'
         ]);
         $photo_deskripsi = $request->file('photo_deskripsi');
-
         $tmpPhoto = array();
         foreach ($photo_deskripsi as $key => $value) {
             $nameFile = $value->store('image-product');
@@ -111,6 +111,10 @@ class ProductController extends Controller
 
         product::create($validatedData);
         return redirect('/dashboard/product')->with('success', 'Create new product success');
+        // if ($photo_deskripsi) {
+        // } else {
+        //     return back()->with('error', 'Please upload deskripsi gambar');
+        // }
     }
 
     /**
@@ -121,7 +125,12 @@ class ProductController extends Controller
      */
     public function show(product $product)
     {
-        //
+
+        return view('admin.product.detail', [
+            'title' => 'Detail',
+            'template' => 'view',
+            'product' => $product
+        ]);
     }
 
     /**

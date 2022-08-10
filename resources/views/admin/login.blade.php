@@ -25,9 +25,12 @@
                         <input type="text" class="form-control" id="username" name="username" placeholder="Username or Email" autofocus required value="{{ old('username') }}">
                         <label for="username">Username or Email address</label>
                     </div>
-                    <div class="form-floating">
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
-                        <label for="password">Password</label>
+                    <div class="input-group">
+                        <div class="form-floating w-100">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+                            <label for="password">Password</label>
+                        </div>
+                        <i class="fa fa-eye-slash" onclick="showHide(this)" id="togglePassword" style="cursor: pointer;z-index: 10; margin-left: -40px;width: 30px; font-size: 20px; margin-top: 7%;"></i>
                     </div>
                     <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
                     <a href="{{ url('/') }}" class="btn btn-link w-100">Kembali</a>
@@ -36,5 +39,21 @@
         </div>
     </div>
 </div>
+<script>
+    function showHide(obj) {
+        const password = document.querySelector('#password');
+        // toggle the type attribute
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+        password.style.marginBottom = "10px";
 
+        if (obj.classList.contains('fa-eye-slash')) {
+            obj.classList.remove('fa-eye-slash');
+            obj.classList.add('fa-eye');
+        } else {
+            obj.classList.remove('fa-eye');
+            obj.classList.add('fa-eye-slash');
+        }
+    }
+</script>
 @endsection

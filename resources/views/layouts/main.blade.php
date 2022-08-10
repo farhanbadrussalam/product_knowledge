@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('gambar/logo.png') }}">
     <title>Knowledge | {{ $title }}</title>
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
@@ -269,6 +270,67 @@
             </div>
         </div>
     </main>
+    <!-- Footer-->
+    <footer class="page-footer font-small" style="background-color: #132646; padding-top: 20px;">
+        <!-- Footer Links -->
+        <div class="container text-md-left">
+            <!-- Grid row -->
+            <div class="row">
+                <!-- Grid column -->
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <!-- Content -->
+                    <img src="{{asset('gambar/kitologo.png')}}" style="width:40%" alt="Image">
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12">
+                    <!-- Contact details -->
+                    <h5 class="font-weight-bold text-uppercase mb-4">
+                        <font style="font-size: 15px; line-height: 150%" color="#FFFFFF"><b><i class="fa fa-map-marker"></i> ADDRESS</b></font>
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p class="small">
+                                <font color="#f2f2f2">
+                                    Jl. Raya Jetis Perning KM 43
+                                    Mojokerto,<br> East Java Indonesia 61352
+                                </font>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-md-4 col-sm-6 col-xs-12 text-md-left">
+                    <!-- Social buttons -->
+                    <h5 class="font-weight-bold text-uppercase mb-4">
+                        <font style="font-size: 15px; line-height: 150%" color="#FFFFFF"><i class="fa fa-phone"></i> CONTACT</font>
+                    </h5>
+                    <ul class="list-unstyled">
+                        <li>
+                            <p class="small">
+                                <font color="#f2f2f2">
+                                    +62 321 365788 <br>
+                                    +62 321 365789 <br>
+                                    +62 321 365790 <br>
+                                    +62 321 365787 (Fax)
+                                </font>
+                            </p>
+                        </li>
+                    </ul>
+                </div>
+
+
+            </div>
+            <!-- Grid row -->
+        </div>
+        <!-- Footer Links -->
+
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3" style="background-color: #000000; padding:5px">
+            <p class="small" style="color: #ffffff">© 2022 Copyright: Kitoshindo International Biotech </p>
+        </div>
+        <!-- Copyright -->
+
+    </footer>
     <script>
         $(document).ready(function() {
             const session = '<?= session()->has('success') ?>';
@@ -298,7 +360,7 @@
     </main>
     @else
     <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 py-3 shadow" style="background-color: #03030e !important;">
-        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">
+        <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="{{ url('/') }}">
             <img src="{{ asset('gambar/kitoshindo-logo.png') }}" alt="logo" class="img-fluid" style="width: 100px;">
         </a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">

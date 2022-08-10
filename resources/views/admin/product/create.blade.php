@@ -75,9 +75,14 @@
                         <div class="col-12 text-center">
                             <a href="javascript:void(0)" style="text-decoration: none;" onclick="tambahUpload()">Tambah gambar</a>
                         </div>
+                        @error('photo_deskripsi')
+                        <p class="text-danger">
+                            {{ $message }}
+                        </p>
+                        @enderror
                         <div class="col-12 mt-2" id="formUploadGambar">
                             <div>
-                                <input type="file" accept="image/*" name="photo_deskripsi[]" id="gambar[]" class="form-control form-control-sm">
+                                <input type="file" accept="image/*" name="photo_deskripsi[]" id="gambar[]" class="form-control form-control-sm @error('photo_deskripsi') is-invalid @enderror">
                                 <div class="preview[]" id="preview[]"></div>
                             </div>
                         </div>
@@ -91,6 +96,17 @@
     document.addEventListener('trix-file-accept', function(e) {
         e.preventDefault();
     })
+
+    let sessionPHP = "<?= session()->has('error') ?>";
+    if (sessionPHP) {
+        swal({
+            title: "Berhasil",
+            text: sessionPHP,
+            type: 'success',
+            showConfirmButton: false,
+            timer: 3000
+        });
+    }
 
     function tambahUpload() {
         let parent = document.createElement('div');

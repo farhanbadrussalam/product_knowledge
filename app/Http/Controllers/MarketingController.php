@@ -27,15 +27,12 @@ class MarketingController extends Controller
 
     public function dataAjax()
     {
-        $users = User::all();
+        $users = User::orderBy('id', 'DESC')->get();
         return DataTables::of($users)
             ->addIndexColumn()
             ->addColumn('action', function ($user) {
                 return '
                         <div class="d-flex justify-content-center w-100">
-                            <a href="' . url("dashboard/marketing/$user->id") . '" class="badge bg-info me-2">
-                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                            </a>
                             <a href="' . url("dashboard/marketing/$user->id/edit") . '" class="badge bg-warning me-2">
                                 <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                             </a>

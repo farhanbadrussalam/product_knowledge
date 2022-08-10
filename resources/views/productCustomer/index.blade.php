@@ -26,7 +26,7 @@
                 </form>
             </div>
         </div>
-        <div class="col-md-12 mt-3 vh-100">
+        <div class="col-md-12 mt-3">
             <h2><i class="fa fa-caret-right" aria-hidden="true"></i> List Product</h2>
             <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                 @foreach($products as $product)

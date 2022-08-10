@@ -11,8 +11,9 @@ use App\Models\customer;
 use App\Models\booking;
 
 use App\Http\Controllers\Controller;
-
+use App\Mail\NotifyMail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Mail;
 
 class ProductCustomerController extends Controller
 {
@@ -75,11 +76,23 @@ class ProductCustomerController extends Controller
 
         customer::create($data);
 
-        return redirect('product-customer')->with('success', [
-            'status' => 200,
-            'token' => $token,
-            'message' => 'Token berhasil di buat'
-        ]);
+        $details = [
+            'title' => 'Berikut Token ID Anda',
+            'body' => $token
+        ];
+
+        // send mail
+        Mail::to($request->email)->send(new NotifyMail($details));
+
+        if (Mail::failures()) {
+            return response()->Fail('Sorry! Please try again latter');
+        } else {
+            return redirect('product-customer')->with('success', [
+                'status' => 200,
+                'token' => $token,
+                'message' => 'Token berhasil di buat'
+            ]);
+        }
     }
 
     public function searchToken(Request $request)
