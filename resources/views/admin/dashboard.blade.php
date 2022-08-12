@@ -63,6 +63,7 @@
                     <th scope="col">Product</th>
                     <th scope="col">Qty</th>
                     <th scope="col">Price</th>
+                    <th scope="col">Date order</th>
                 </tr>
             </thead>
             <tbody>
@@ -73,6 +74,7 @@
                     <td>{{ $value->product->name }}</td>
                     <td>{{ $value->qty }}</td>
                     <td>Rp. {{ number_format($value->price,0,',','.') }}</td>
+                    <td>{{ date_format(date_create($value->created_at), "d F Y") }}</td>
                 </tr>
                 @endforeach
             </tbody>

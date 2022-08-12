@@ -81,7 +81,7 @@
         idProduct.value = item.id;
         priceProduct.value = `Rp. ${Intl.NumberFormat().format(item.harga)}`;
         grandTotal.innerHTML = `Rp. ${Intl.NumberFormat().format(item.harga)}`;
-
+        postGrandTotal.value = Number(qtyProduct.value) * Number(item.harga);
         qtyProduct.onchange = function(evt) {
             let qty = evt.target.value;
 

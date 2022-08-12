@@ -7,6 +7,7 @@ use App\Models\customer;
 use App\Models\booking;
 use App\Models\User;
 
+date_default_timezone_set('Asia/Jakarta');
 class AdminController extends Controller
 {
     /**
@@ -16,12 +17,15 @@ class AdminController extends Controller
      */
     public function index()
     {
+        $tgl_sekarang    = strtotime(now()->format('Y-m-d'));
+        $tgl_seminggu    = date('Y-m-d', strtotime("-7 day", $tgl_sekarang));
+
         $data = array(
             'title' => 'dashboard',
             'template' => 'admin',
             'customer' => customer::all(),
             'pemesanan' => booking::all(),
-            'marketing' => User::all()
+            'marketing' => User::whereBetween('created_at', [$tgl_sekarang, $tgl_seminggu])->get()
         );
         return view('admin.dashboard', $data);
     }
