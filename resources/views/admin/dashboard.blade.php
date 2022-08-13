@@ -68,6 +68,7 @@
             </thead>
             <tbody>
                 @foreach($pemesanan as $key => $value)
+                @if($value->product && $value->customer)
                 <tr>
                     <td>{{ $key+1 }}</td>
                     <td>{{ $value->customer->name }}</td>
@@ -76,6 +77,7 @@
                     <td>Rp. {{ number_format($value->price,0,',','.') }}</td>
                     <td>{{ date_format(date_create($value->created_at), "d F Y") }}</td>
                 </tr>
+                @endif
                 @endforeach
             </tbody>
         </table>
